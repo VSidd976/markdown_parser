@@ -1,0 +1,2 @@
+whitespace = _{ " " | "\t" }
+newline = _{ "\r\n" | "\n" | "\r" }
