@@ -27,6 +27,7 @@ fn h1_test() -> anyhow::Result<()> {
     let res = MarkdownParser::parse(Rule::heading, input);
 
     assert!(res.is_ok());
+    assert_eq!(res.unwrap().as_str(), input);
 
     Ok(())
 }
@@ -37,6 +38,7 @@ fn h6_test() -> anyhow::Result<()> {
     let res = MarkdownParser::parse(Rule::heading, input);
 
     assert!(res.is_ok());
+    assert_eq!(res.unwrap().as_str(), input);
 
     Ok(())
 }
@@ -47,6 +49,7 @@ fn paragraph_test() -> anyhow::Result<()> {
     let res = MarkdownParser::parse(Rule::paragraph, input);
 
     assert!(res.is_ok());
+    assert_eq!(res.unwrap().as_str(), input);
 
     Ok(())
 }
@@ -57,6 +60,7 @@ fn list_test() -> anyhow::Result<()> {
     let res = MarkdownParser::parse(Rule::list, input);
 
     assert!(res.is_ok());
+    assert_eq!(res.unwrap().as_str(), input);
 
     Ok(())
 }
@@ -67,6 +71,7 @@ fn blockquote_test() -> anyhow::Result<()> {
     let res = MarkdownParser::parse(Rule::blockquote, input);
 
     assert!(res.is_ok());
+    assert_eq!(res.unwrap().as_str(), input);
 
     Ok(())
 }
@@ -77,6 +82,7 @@ fn code_block_test() -> anyhow::Result<()> {
     let res = MarkdownParser::parse(Rule::code_block, input);
 
     assert!(res.is_ok());
+    assert_eq!(res.unwrap().as_str(), input);
 
     Ok(())
 }
@@ -87,6 +93,7 @@ fn document_test() -> anyhow::Result<()> {
     let res = MarkdownParser::parse(Rule::document, input);
 
     assert!(res.is_ok());
+    assert_eq!(res.unwrap().as_str(), input);
 
     Ok(())
 }
