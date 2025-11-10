@@ -1,2 +1,41 @@
 whitespace = _{ " " | "\t" }
 newline = _{ "\r\n" | "\n" | "\r" }
+
+inner_text = { (!newline ~ ANY) }
+
+heading = {
+    ("#" | "##" | "###" | "####" | "#####" | "######") ~
+    whitespace* ~
+    inner_text+ ~
+    newline*
+}
+
+paragraph_line = { inner_text+ ~ newline }
+paragraph = {
+    (paragraph_line+ | inner_text+) ~ newline*
+}
+
+list_item = {
+    ("*" | "-") ~ whitespace+ ~ inner_text+ ~ newline*
+}
+list = { list_item+ }
+
+blockquote = {
+    ">" ~ whitespace* ~ inner_text+ ~ newline*
+}
+
+code_block = {
+    "```" ~ inner_text* ~ newline ~
+    (!"```" ~ ANY)* ~
+    "```" ~ newline*
+}
+
+block = _{
+    heading |
+    paragraph |
+    list |
+    blockquote |
+    code_block
+}
+
+document = { SOI ~ block* ~ EOI }
