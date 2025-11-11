@@ -2,6 +2,7 @@ use markdown_parser::*;
 use clap::Parser as ClapParser;
 use pest::Parser as PestParser;
 use std::fs;
+use std::io;
 
 fn main() -> anyhow::Result<()>{
     let cli = Cli::parse();
@@ -17,6 +18,14 @@ fn main() -> anyhow::Result<()>{
         return Err(anyhow::anyhow!("specify file path or row through --content"));
     };
     let result = MarkdownParser::parse(Rule::document, &input)?;
-    println!("{:?}", result);
+    if let Some(output_path) = cli.output {
+        let mut file = fs::File::create(&output_path)?;
+        format_to_txt(result, &mut file).map_err(|e| anyhow::anyhow!(e))?;
+        println!("\n=== Successful export to {output_path} ===");
+    } else {
+        println!("\n=== Result ===\n");
+        let mut handle = io::stdout();
+        format_to_txt(result, &mut handle).map_err(|e| anyhow::anyhow!(e))?;
+    };
     Ok(())
 }

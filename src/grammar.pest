@@ -1,27 +1,26 @@
 whitespace = _{ " " | "\t" }
 newline = _{ "\r\n" | "\n" | "\r" }
 
-inner_text = { (!newline ~ ANY) }
+inner_text = { (!newline ~ ANY)+ }
+text = @{ inner_text }
 
+level = @{ "#"+ }
 heading = {
-    ("#" | "##" | "###" | "####" | "#####" | "######") ~
-    whitespace* ~
-    inner_text+ ~
-    newline*
+    level ~ whitespace* ~ text ~ newline*
 }
 
-paragraph_line = { inner_text+ ~ newline }
+paragraph_line = { inner_text ~ newline }
 paragraph = {
-    (paragraph_line+ | inner_text+) ~ newline*
+    (paragraph_line+ | inner_text) ~ newline*
 }
 
 list_item = {
-    ("*" | "-") ~ whitespace+ ~ inner_text+ ~ newline*
+    ("*" | "-") ~ whitespace+ ~ inner_text ~ newline*
 }
 list = { list_item+ }
 
 blockquote = {
-    ">" ~ whitespace* ~ inner_text+ ~ newline*
+    ">" ~ whitespace* ~ inner_text ~ newline*
 }
 
 code_block = {
@@ -31,11 +30,11 @@ code_block = {
 }
 
 block = _{
+    code_block |
     heading |
-    paragraph |
-    list |
     blockquote |
-    code_block
+    list |
+    paragraph 
 }
 
 document = { SOI ~ block* ~ EOI }
