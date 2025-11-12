@@ -134,7 +134,6 @@ println!("{}", code);
 
 ## Code Example
 
-
 ```rust
 use markdown_parser::{MarkdownParser, Rule};
 use pest::Parser;
