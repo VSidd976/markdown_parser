@@ -2,7 +2,7 @@
 name = "markdown_parser"
 version = "0.1.0"
 edition = "2024"
-description = "markdown parser that saves data to txt"
+description = "A simple Markdown parser using pest PEG parse"
 
 [dependencies]
 anyhow = "1.0.100"

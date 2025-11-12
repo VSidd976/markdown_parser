@@ -64,6 +64,18 @@ cargo run -- path/to/file.md --output result.txt
 cargo run -- --content "# Title\n> Quote\n* Item 1\n* Item 2\nParagraph text." --output output.txt
 ```
 
+#### Show help information
+
+```bash
+cargo run -- --help
+```
+
+#### Show credits and project information
+
+```bash
+cargo run -- --credits
+```
+
 ### Arguments
 
 | Argument | Short | Type | Description |
@@ -71,6 +83,8 @@ cargo run -- --content "# Title\n> Quote\n* Item 1\n* Item 2\nParagraph text." -
 | `file_path` | — | String (optional) | Path to Markdown file to parse |
 | `--content` | `-c` | String | Raw Markdown content to parse |
 | `--output` | `-o` | String | Path to output text file |
+| `--help` | `-h` | Flag | Display help information |
+| `--credits` | — | Flag | Display credits and project information |
 
 ## Example
 

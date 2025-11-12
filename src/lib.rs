@@ -16,6 +16,9 @@ pub struct Cli {
 
     #[arg(short, long)]
     pub output: Option<String>,
+
+    #[arg(long)]
+    pub credits: bool,
 }
 
 pub fn format_to_txt(pairs: pest::iterators::Pairs<Rule>, writer: &mut dyn std::io::Write) -> anyhow::Result<()> {
@@ -63,4 +66,17 @@ pub fn format_to_txt(pairs: pest::iterators::Pairs<Rule>, writer: &mut dyn std::
         }
     }
     Ok(())
+}
+
+pub fn print_credits() {
+    println!("\n         markdown_parser v0.1.0                  ");
+    println!("  A simple Markdown parser using pest       \n");
+    println!("  Features:");
+    println!("  • Parse Markdown syntax (H1-H6, code blocks, blockquotes, lists)");
+    println!("  • Convert to formatted text output");
+    println!("  • Export results to txt files");
+    println!("  • CLI interface with multiple input options\n");
+    println!("  Repository: https://github.com/VSidd976/markdown_parser");
+    println!("  Author:     Valentyn Sydorenko");
+    println!("  Built with: Rust, pest, clap\n");
 }

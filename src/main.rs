@@ -6,6 +6,10 @@ use std::io;
 
 fn main() -> anyhow::Result<()>{
     let cli = Cli::parse();
+    if cli.credits {
+        print_credits();
+        return Ok(());
+    }
     let input = if let Some(file_path) = cli.file_path {
         println!("=== File parsing: {} ===\n", &file_path);
         fs::read_to_string(file_path)?
@@ -15,7 +19,7 @@ fn main() -> anyhow::Result<()>{
         content
     }
     else {
-        return Err(anyhow::anyhow!("specify file path or row through --content"));
+        return Err(anyhow::anyhow!("specify file path or provide row via --content"));
     };
     let result = MarkdownParser::parse(Rule::document, &input)?;
     if let Some(output_path) = cli.output {
